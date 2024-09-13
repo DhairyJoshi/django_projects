@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title> 
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+   </head>
+<body>
+    <div class="content">
+        {% for message in messages %}
+            {% if 'error' in message.tags %}
+                <div class="error">
+                    {{ message }}
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+            {% else %}
+                <div class="message">
+                    {{ message }}
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="wrapper">
+            <h2>Login</h2>
+            <form action="login" method="post">
+                {% csrf_token %}
+    
+                <div class="input-box">
+                    <input type="text" name="username" placeholder="Enter username" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="password" placeholder="Enter password" required>
+                </div>
+                <div class="input-box button">
+                    <input type="submit" value="Login">
+                </div>
+                <div class="text">
+                    <h3>Not registered yet? <a href="{% url 'register' %}">Register now</a></h3>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
